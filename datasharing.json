@@ -1,112 +1,75 @@
-
 {
     "basePath": "/api",
     "definitions": {
-    	"Localidade": {
-    		"properties": {
-	    		"tipo": {
-	            	"type": "string"
-				},
-				"descricao": {
-	            	"type": "string"
-				}
-			}
-    	},
-    	"Logradouro": {
-    		"properties": {
-	    		"tipo": {
-	            	"type": "string"
-				},
-				"descricao": {
-	            	"type": "string"
-				}
-			}
-    	},
-    	"EnderecoEspecial": {
-    		"properties": {
-	    		"tipo": {
-	            	"type": "string"
-				},
-				"endereco": {
-	            	"type": "string"
-				},
-				"nome": {
-	            	"type": "string"
-				}
-			}
-    	},
-    	"Cep": {
-    		"properties": {
-	    		"cep": {
-	            	"format": "int32",
+        "Cep": {
+            "properties": {
+                "bairro": {
+                    "type": "string"
+                },
+                "cep": {
+                    "format": "int32",
                     "type": "integer"
-				},
-				"uf": {
-	            	"type": "string"
-				},
-				"bairro": {
-	            	"type": "string"
-				},
-				"complemento": {
-	            	"type": "string"
-				},
-				"municipio": {
-	            	"type": "string"
-				},
-				"localidade": {
-	            	"$ref": "#/definitions/Localidade"
-				},
-				"logradouro": {
-	            	"$ref": "#/definitions/Logradouro"
-				},
-				"enderecoEspecial": {
-	            	"$ref": "#/definitions/EnderecoEspecial"
-				}
-			}
-    	}
+                },
+                "complemento": {
+                    "type": "string"
+                },
+                "enderecoEspecial": {
+                    "$ref": "#/definitions/EnderecoEspecial"
+                },
+                "localidade": {
+                    "$ref": "#/definitions/Localidade"
+                },
+                "logradouro": {
+                    "$ref": "#/definitions/Logradouro"
+                },
+                "municipio": {
+                    "type": "string"
+                },
+                "uf": {
+                    "type": "string"
+                }
+            }
+        },
+        "EnderecoEspecial": {
+            "properties": {
+                "endereco": {
+                    "type": "string"
+                },
+                "nome": {
+                    "type": "string"
+                },
+                "tipo": {
+                    "type": "string"
+                }
+            }
+        },
+        "Localidade": {
+            "properties": {
+                "descricao": {
+                    "type": "string"
+                },
+                "tipo": {
+                    "type": "string"
+                }
+            }
+        },
+        "Logradouro": {
+            "properties": {
+                "descricao": {
+                    "type": "string"
+                },
+                "tipo": {
+                    "type": "string"
+                }
+            }
+        }
     },
     "info": {
-        "description": "Página para documentar e exemplificar a API REST do DataSharing",
+        "description": "P\u00e1gina para documentar e exemplificar a API REST do DataSharing",
         "title": "DataSharing",
         "version": "1.0"
     },
     "paths": {
-        "/cep/{cep}": {
-            "get": {
-                "description": "Retorna os dados do CEP",
-                "operationId": "getPetById",
-                "parameters": [
-                    {
-                        "description": "CEP a ser pesquisado",
-                        "format": "int64",
-                        "in": "path",
-                        "name": "cep",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "produces": [
-                	"application/json",
-                	"application/xml",
-                    "text/plain"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/Cep"
-                        }
-                    },
-                    "404": {
-                        "description": "Cep não encontrado"
-                    }
-                },
-                "summary": "Get single CEP",
-                "tags": [
-                    "cep"
-                ]
-            }
-        },
         "/cep/": {
             "get": {
                 "consumes": [
@@ -158,17 +121,53 @@
                     "200": {
                         "description": "successful operation",
                         "schema": {
-                            "type": "array",
-							"items": {
-								"$ref": "#/definitions/Cep"
-							}
+                            "items": {
+                                "$ref": "#/definitions/Cep"
+                            },
+                            "type": "array"
                         }
                     },
                     "400": {
-                        "description": "Bad request, se a UF ou Cidade não for encontrada; Se o limit for informado e for menor que 1"
+                        "description": "Bad request, se a UF ou Cidade n\u00e3o for encontrada; Se o limit for informado e for menor que 1"
                     }
                 },
                 "summary": "Get a list of Cep",
+                "tags": [
+                    "cep"
+                ]
+            }
+        },
+        "/cep/{cep}": {
+            "get": {
+                "description": "Retorna os dados do CEP",
+                "operationId": "getPetById",
+                "parameters": [
+                    {
+                        "description": "CEP a ser pesquisado",
+                        "format": "int64",
+                        "in": "path",
+                        "name": "cep",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/plain"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Cep"
+                        }
+                    },
+                    "404": {
+                        "description": "Cep n\u00e3o encontrado"
+                    }
+                },
+                "summary": "Get single CEP",
                 "tags": [
                     "cep"
                 ]
