@@ -87,6 +87,7 @@
                 ],
                 "produces": [
                 	"application/json",
+                	"application/xml",
                     "text/plain"
                 ],
                 "responses": {
