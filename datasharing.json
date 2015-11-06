@@ -1,0 +1,186 @@
+{
+    "basePath": "/api",
+    "definitions": {
+    	"Localidade": {
+    		"properties": {
+	    		"tipo": {
+	            	"type": "string"
+				},
+				"descricao": {
+	            	"type": "string"
+				}
+			}
+    	},
+    	"Logradouro": {
+    		"properties": {
+	    		"tipo": {
+	            	"type": "string"
+				},
+				"descricao": {
+	            	"type": "string"
+				}
+			}
+    	},
+    	"EnderecoEspecial": {
+    		"properties": {
+	    		"tipo": {
+	            	"type": "string"
+				},
+				"endereco": {
+	            	"type": "string"
+				},
+				"nome": {
+	            	"type": "string"
+				}
+			}
+    	},
+    	"Cep": {
+    		"properties": {
+	    		"cep": {
+	            	"format": "int32",
+                    "type": "integer"
+				},
+				"uf": {
+	            	"type": "string"
+				},
+				"bairro": {
+	            	"type": "string"
+				},
+				"complemento": {
+	            	"type": "string"
+				},
+				"municipio": {
+	            	"type": "string"
+				},
+				"localidade": {
+	            	"$ref": "#/definitions/Localidade"
+				},
+				"logradouro": {
+	            	"$ref": "#/definitions/Logradouro"
+				},
+				"enderecoEspecial": {
+	            	"$ref": "#/definitions/EnderecoEspecial"
+				}
+			}
+    	}
+    },
+    "info": {
+        "description": "Página para documentar e exemplificar a API REST do DataSharing",
+        "title": "DataSharing",
+        "version": "1.0"
+    },
+    "paths": {
+        "/cep/{cep}": {
+            "get": {
+                "description": "Retorna os dados do CEP",
+                "operationId": "getPetById",
+                "parameters": [
+                    {
+                        "description": "CEP a ser pesquisado",
+                        "format": "int64",
+                        "in": "path",
+                        "name": "cep",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                	"application/json",
+                    "text/plain"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Cep"
+                        }
+                    },
+                    "404": {
+                        "description": "Cep não encontrado"
+                    }
+                },
+                "summary": "Get single CEP",
+                "tags": [
+                    "cep"
+                ]
+            }
+        },
+        "/cep/": {
+            "get": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "description": "",
+                "operationId": "uploadFile",
+                "parameters": [
+                    {
+                        "description": "UF do estado",
+                        "in": "query",
+                        "name": "uf",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Nome da Cidade",
+                        "in": "query",
+                        "name": "municipio",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Nome do Bairro",
+                        "in": "query",
+                        "name": "bairro",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Nome do Logradouro",
+                        "in": "query",
+                        "name": "logradouro",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Limite de registros a serem retornados pela pesquisa",
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+							"items": {
+								"$ref": "#/definitions/Cep"
+							}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request, se a UF ou Cidade não for encontrada; Se o limit for informado e for menor que 1"
+                    }
+                },
+                "summary": "Get a list of Cep",
+                "tags": [
+                    "cep"
+                ]
+            }
+        }
+    },
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "tags": [
+        {
+            "description": "Resource de CEP",
+            "name": "cep"
+        }
+    ]
+}
