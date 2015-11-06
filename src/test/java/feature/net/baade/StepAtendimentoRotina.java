@@ -1,5 +1,8 @@
 package feature.net.baade;
 
+import java.math.BigDecimal;
+
+import lombok.val;
 import net.baade.Item;
 import net.baade.Recibo;
 
@@ -21,11 +24,13 @@ public class StepAtendimentoRotina implements En {
 		} );
 
 		Given( "^um servico de \"([^\"]*)\" que custa \"([^\"]*)\"$", ( String arg1, String arg2 ) -> {
-			recibo.listaItemAdd( new Item( arg1, new Float( arg2 ) ) );
+			val valorItem = new BigDecimal( arg2 );
+			recibo.listaItemAdd( new Item( arg1, valorItem ) );
 		} );
 
 		Given( "^um outro servico de \"([^\"]*)\" que custa \"([^\"]*)\"$", ( String arg1, String arg2 ) -> {
-			recibo.listaItemAdd( new Item( arg1, new Float( arg2 ) ) );
+			val valorItem = new BigDecimal( arg2 );
+			recibo.listaItemAdd( new Item( arg1, valorItem ) );
 		} );
 
 		When( "^o cliente pagar em \"([^\"]*)\"", ( String pagamento ) -> {
@@ -49,50 +54,10 @@ public class StepAtendimentoRotina implements En {
 		} );
 
 		Then( "^o valor total do recibo deve ser \"([^\"]*)\"$", ( String arg1 ) -> {
-
+			val valorTotal = new BigDecimal( arg1 );
+			Assert.assertEquals( recibo.getValorAtendimento(), valorTotal );
 		} );
 
 	}
-
-	// @Given( "^um outro serviço de \"([^\"]*)\" que custa (\\d+),(\\d+)$" )
-	// public void um_outro_servi_o_de_que_custa( String arg1, int arg2, int
-	// arg3 ) throws Throwable {
-	// // Write code here that turns the phrase above into concrete actions
-	// throw new PendingException();
-	// }
-	//
-	// @When( "^o cliente pagar em \"([^\"]*)\"$" )
-	// public void o_cliente_pagar_em( String arg1 ) throws Throwable {
-	// // Write code here that turns the phrase above into concrete actions
-	// throw new PendingException();
-	// }
-	//
-	// @Then( "^o recibo deve ter (\\d+) servicos$" )
-	// public void o_recibo_deve_ter_servi_os( int arg1 ) throws Throwable {
-	// // Write code here that turns the phrase above into concrete actions
-	// throw new PendingException();
-	// }
-	//
-	// @Then( "^o servi�o (\\d+) deve ser \"([^\"]*)\"$" )
-	// public void o_servi_o_deve_ser( int arg1, String arg2 ) throws Throwable
-	// {
-	// // Write code here that turns the phrase above into concrete actions
-	// throw new PendingException();
-	// }
-	//
-	// @Given( "^+um serviço de '(.+)' que custa (\\f+)$" )
-	// public void servico1( String servico, Float valor ) throws Throwable {
-	// }
-	//
-	// @When( ".+o cliente pagar em '(.+)'" )
-	// public void formaPagamento( String pagamento ) {
-	// System.out.println( pagamento );
-	//
-	// }
-	//
-	// @Then( ".+o recibo deve ter .+ serviços" )
-	// public void verificarQuantidade( final int position ) {
-	// Assert.assertEquals( recibo.getItens().size(), 1 );
-	// }
 
 }

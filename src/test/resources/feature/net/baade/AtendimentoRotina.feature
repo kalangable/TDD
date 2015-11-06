@@ -11,3 +11,4 @@ Feature: Atendimento Rotina
 		And o servico 2 deve ser "vacinacao contra raiva"
 		And o valor total do recibo deve ser "30.22"
 		
+		
