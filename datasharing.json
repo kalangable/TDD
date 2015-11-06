@@ -1,3 +1,4 @@
+
 {
     "basePath": "/api",
     "definitions": {
@@ -40,7 +41,7 @@
 	            	"format": "int32",
                     "type": "integer"
 				},
-				"uf": {te
+				"uf": {
 	            	"type": "string"
 				},
 				"bairro": {
@@ -86,7 +87,6 @@
                 ],
                 "produces": [
                 	"application/json",
-                	"application/xml",
                     "text/plain"
                 ],
                 "responses": {
