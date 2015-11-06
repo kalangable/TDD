@@ -40,7 +40,7 @@
 	            	"format": "int32",
                     "type": "integer"
 				},
-				"uf": {
+				"uf": {te
 	            	"type": "string"
 				},
 				"bairro": {
@@ -86,6 +86,7 @@
                 ],
                 "produces": [
                 	"application/json",
+                	"application/xml",
                     "text/plain"
                 ],
                 "responses": {
