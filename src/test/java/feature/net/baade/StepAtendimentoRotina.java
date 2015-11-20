@@ -3,7 +3,9 @@ package feature.net.baade;
 import java.math.BigDecimal;
 
 import lombok.val;
-import net.baade.Item;
+import net.baade.Animal;
+import net.baade.Cliente;
+import net.baade.Procedimento;
 import net.baade.Recibo;
 
 import org.junit.Assert;
@@ -13,11 +15,15 @@ import cucumber.api.java8.En;
 public class StepAtendimentoRotina implements En {
 
 	Recibo recibo = new Recibo();
+	Cliente cliente = new Cliente();
 
 	public StepAtendimentoRotina() {
 		Given( "^um cliente com nome \"([^\"]*)\" que tem um animal de nome \"([^\"]*)\"$", ( String arg1, String arg2 ) -> {
-			recibo.setNomeCliente( arg1 );
-			recibo.setNomeAnimal( arg2 );
+
+			Animal fofo = new Animal( arg2 );
+			cliente.setNome( arg1 );
+			cliente.getAnimais().add( fofo );
+
 		} );
 
 		Given( "^(um outro|um) servico de \"([^\"]*)\" que custa ([^\"]*)$", ( String servico, String valor ) -> {
@@ -25,12 +31,12 @@ public class StepAtendimentoRotina implements En {
 
 		Given( "^um servico de \"([^\"]*)\" que custa \"([^\"]*)\"$", ( String arg1, String arg2 ) -> {
 			val valorItem = new BigDecimal( arg2 );
-			recibo.listaItemAdd( new Item( arg1, valorItem ) );
+			recibo.listaItemAdd( new Procedimento( arg1, valorItem ) );
 		} );
 
 		Given( "^um outro servico de \"([^\"]*)\" que custa \"([^\"]*)\"$", ( String arg1, String arg2 ) -> {
 			val valorItem = new BigDecimal( arg2 );
-			recibo.listaItemAdd( new Item( arg1, valorItem ) );
+			recibo.listaItemAdd( new Procedimento( arg1, valorItem ) );
 		} );
 
 		When( "^o cliente pagar em \"([^\"]*)\"", ( String pagamento ) -> {

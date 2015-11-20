@@ -11,15 +11,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Recibo {
-	private String nomeCliente;
-	private String nomeAnimal;
+	private Cliente cliente;
 	private BigDecimal valorAtendimento = new BigDecimal( 0 );
+	private FormaPagamento formaPagamento;
 	@Setter( AccessLevel.PRIVATE )
-	private List<Item> itens;
+	private List<Procedimento> itens;
 
-	public void listaItemAdd( Item item ) {
+	public void listaItemAdd( Procedimento item ) {
 		if ( itens == null ) {
-			itens = new ArrayList<Item>();
+			itens = new ArrayList<Procedimento>();
 		}
 		itens.add( item );
 		this.valorAtendimento = this.valorAtendimento.add( item.getValor() );
