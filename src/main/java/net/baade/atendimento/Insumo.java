@@ -1,4 +1,4 @@
-package net.baade;
+package net.baade.atendimento;
 
 public interface Insumo {
 

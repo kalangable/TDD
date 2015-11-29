@@ -1,7 +1,8 @@
-package net.baade;
+package net.baade.atendimento;
 
 import java.math.BigDecimal;
 
+import net.baade.Medico;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

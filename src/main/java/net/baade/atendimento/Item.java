@@ -1,4 +1,4 @@
-package net.baade;
+package net.baade.atendimento;
 
 import java.math.BigDecimal;
 

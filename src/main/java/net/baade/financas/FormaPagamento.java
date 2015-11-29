@@ -1,4 +1,4 @@
-package net.baade;
+package net.baade.financas;
 
 public enum FormaPagamento {
 

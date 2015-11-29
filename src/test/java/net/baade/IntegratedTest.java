@@ -2,6 +2,9 @@ package net.baade;
 
 import java.math.BigDecimal;
 
+import net.baade.atendimento.Procedimento;
+import net.baade.financas.Recibo;
+
 import org.junit.Assert;
 import org.junit.Test;
 

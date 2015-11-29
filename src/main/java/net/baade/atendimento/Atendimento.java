@@ -1,6 +1,9 @@
-package net.baade;
+package net.baade.atendimento;
 
 import java.math.BigDecimal;
+
+import net.baade.financas.Fatura;
+import net.baade.financas.Recibo;
 
 public class Atendimento {
 
